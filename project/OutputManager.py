@@ -1,3 +1,2 @@
-def OutputM():
-
-    print("OutputM")
+def output_manager():
+    print("output_manager")
