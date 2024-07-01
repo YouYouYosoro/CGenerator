@@ -5,19 +5,9 @@ import streamlit as st
 import streamlit_antd_components as sac
 from . import utils
 def txt_generator():
+
     project_dir = os.path.dirname(os.path.abspath(__file__)).replace("\\", "/")
     config_dir = project_dir + "/config/"  # 配置文件
-
-    api_config = toml.load(config_dir + "api.toml")  # 加载API配置
-    openai_key = api_config["GPT"]["openai_key"]
-    openai_base = api_config["GPT"]["openai_base"]
-    kimi_key = api_config["KIMI"]["kimi_key"]
-    kimi_base = api_config["KIMI"]["kimi_base"]
-    deepseek_key = api_config["DEEPSEEK"]["deepseek_key"]
-    deepseek_base = api_config["DEEPSEEK"]["deepseek_base"]
-    chatglm_key = api_config["CHATGLM"]["chatglm_key"]
-    chatglm_base = api_config["CHATGLM"]["chatglm_base"]
-
     generator_config = toml.load(config_dir + "generator.toml")
 
     col1, col2 = st.columns([0.4, 0.6], gap="medium")
@@ -140,11 +130,12 @@ def txt_generator():
 
             selected_models = generator_config["GENERATOR"]["generator_model"]
             tabs = st.tabs(selected_models)
-            doc = utils.toml_to_txt()
+            utils.load_config()
+            str = utils.toml_to_str()
 
             for i, model in enumerate(selected_models):
                 with tabs[i]:
-                    result = utils.generate_by_models(model, doc)
+                    result = utils.generate_by_models(model, str)
                     st.text_area("生成结果", value=result, height=400)
 
 

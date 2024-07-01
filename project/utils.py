@@ -4,48 +4,47 @@ import datetime
 from openai import OpenAI
 from zhipuai import ZhipuAI
 
+def load_config():
+    global project_dir
+    project_dir = os.path.dirname(os.path.abspath(__file__)).replace("\\", "/")
+    global config_dir
+    config_dir = project_dir + "/config/"  # 配置文件
 
-project_dir = os.path.dirname(os.path.abspath(__file__)).replace("\\", "/")
-config_dir = project_dir + "/config/"  # 配置文件
-input_dir = project_dir + "/input/"    # 输入文件
-output_dir = project_dir + "/output/"  # 输出文件
+    global api_config
+    api_config = toml.load(config_dir + "api.toml")  # 加载API配置
+    global kimi_key
+    kimi_key = api_config["KIMI"]["kimi_key"]
+    global kimi_base
+    kimi_base = api_config["KIMI"]["kimi_base"]
+    global deepseek_key
+    deepseek_key = api_config["DEEPSEEK"]["deepseek_key"]
+    global deepseek_base
+    deepseek_base = api_config["DEEPSEEK"]["deepseek_base"]
+    global chatglm_key
+    chatglm_key = api_config["CHATGLM"]["chatglm_key"]
+    global chatglm_base
+    chatglm_base = api_config["CHATGLM"]["chatglm_base"]
 
-api_config = toml.load(config_dir + "api.toml")  # 加载API配置
-openai_key = api_config["GPT"]["openai_key"]
-openai_base = api_config["GPT"]["openai_base"]
-kimi_key = api_config["KIMI"]["kimi_key"]
-kimi_base = api_config["KIMI"]["kimi_base"]
-deepseek_key = api_config["DEEPSEEK"]["deepseek_key"]
-deepseek_base = api_config["DEEPSEEK"]["deepseek_base"]
-chatglm_key = api_config["CHATGLM"]["chatglm_key"]
-chatglm_base = api_config["CHATGLM"]["chatglm_base"]
+    global generator_config
+    generator_config = toml.load(config_dir + "generator.toml")
+    global generator_model
+    generator_model = generator_config["GENERATOR"]["generator_model"]
+    global main_areas
+    main_areas = generator_config["GENERATOR"]["main_areas"]
+    global needs
+    needs = generator_config["GENERATOR"]["needs"]
+    global key_words
+    key_words = generator_config["GENERATOR"]["key_words"]
+    global character_style
+    character_style = generator_config["GENERATOR"]["character_style"]
+    global language_style
+    language_style = generator_config["GENERATOR"]["language_style"]
 
-generator_config = toml.load(config_dir + "generator.toml")
-generator_model = generator_config["GENERATOR"]["generator_model"]
-main_areas = generator_config["GENERATOR"]["main_areas"]
-needs = generator_config["GENERATOR"]["needs"]
-key_words = generator_config["GENERATOR"]["key_words"]
-character_style = generator_config["GENERATOR"]["character_style"]
-language_style = generator_config["GENERATOR"]["language_style"]
+def toml_to_str():
+    str = f'主要领域：{main_areas},' + f'以{character_style}的口吻和角度,' + f'以及{language_style}的话语风格'+ '写一篇营销文案,' + f'需求如下: {needs},' + f'关键词：{key_words}'
+    return str
 
-def toml_to_txt():
-    current_time = datetime.datetime.now().strftime("%Y-%m-%d %H-%M-%S")
-    os.makedirs(input_dir)
-    input_file_dir = input_dir + current_time
-    os.makedirs(input_file_dir)
-    # 打开一个文件，如果文件不存在则创建它，并以写入模式打开
-    with open(input_file_dir + '/' + 'input.txt', 'w', encoding='utf-8') as file:
-        file.write(f"主要领域: {main_areas}\n")
-        file.write(f"以{character_style}的口吻和角度\n")
-        file.write(f"以及{language_style}的话语风格\n")
-        file.write("写一篇营销文案")
-        file.write(f"需求如下：{needs}\n")
-        file.write(f"关键词：{key_words}\n")
-    with open(input_file_dir + '/' + 'input.txt', 'r', encoding='utf-8') as file:
-        doc = file.read()
-    return doc
-
-def generate_by_models(model, doc):
+def generate_by_models(model, str):
     result = None
     print("***正在生成***\n")
     if "moonshot-v1-8k" in model:
@@ -60,7 +59,7 @@ def generate_by_models(model, doc):
         messages=[
             {"role": "system", "content": f"你是一个优秀的营销文案作者"},
             {"role": "user",
-             "content": f"我的要求说明书如下：{doc},根据我的需求给我一份营销文案，仅仅给出文案，给出文案之后立即停止回答"}
+             "content": f"我的需求说明如下：{str},根据我的需求给我一份营销文案，仅仅给出文案，给出文案之后立即停止回答"}
         ])
     # 打印 response 的内容，用于调试
     print(response)
