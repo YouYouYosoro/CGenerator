@@ -1,0 +1,20 @@
+[GPT]
+openai_key = "sk-"
+openai_base = "https://api.openai.com/v1"
+
+[KIMI]
+kimi_key = "sk-aim2Q3eIJWAamc0elrBebq52RggkAr3iXiH9lJgvvR1inZtb"
+kimi_base = "https://api.moonshot.cn/v1"
+
+[DEEPSEEK]
+deepseek_key = "sk-f78ed78a29ca44b29665bc2fc37910a7"
+deepseek_base = "https://api.deepseek.com/"
+
+[CHATGLM]
+chatglm_key = "ec2901789d57f15608ddbcc3858e834a.acOjIb85ijAsTJDT"
+chatglm_base = "https://open.bigmodel.cn/api/paas/v4/"
+
+[LOCAL]
+api_key = ""
+base_url = ""
+model_name = ""

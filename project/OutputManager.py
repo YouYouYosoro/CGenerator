@@ -1,0 +1,3 @@
+def OutputM():
+
+    print("OutputM")
