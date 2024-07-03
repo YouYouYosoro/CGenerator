@@ -15,10 +15,7 @@ st.set_page_config(
 with st.sidebar.container():
     menu = sac.menu(
         items=[
-            # sac.MenuItem('API_KEY管理', icon='bi bi-key'),
-            sac.MenuItem('营销文案生成器', icon='book'),
-            sac.MenuItem('生鲜文案生成器', icon='file'),
-            # sac.MenuItem('菜品推荐', icon='bi bi-book'),
+            sac.MenuItem('营销文案生成', icon='book'),
             sac.MenuItem('提示词管理', icon='file-earmark-break'),
             sac.MenuItem('输出管理', icon='file'),
         ],
@@ -27,13 +24,7 @@ with st.sidebar.container():
     )
 
 with st.container():
-    if menu == 'API_KEY管理':
-        api_maneger()
-    elif menu == '营销文案生成器':
-        txt_generator()
-    elif menu == '生鲜文案生成器':
-        txt_generator()
-    elif menu == '菜品推荐':
+    if menu == '营销文案生成':
         txt_generator()
     elif menu == '提示词管理':
         prompt_manager()

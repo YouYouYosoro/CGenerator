@@ -20,11 +20,6 @@ doubao_endpoint = "ep-20240701081459-gkc5n"
 qwen_app_id = "8dad373b42cf44a783ec03430bda00a0"
 qwen_key = "sk-2fe61326b0ed4cb297b252a5a64c7192"
 
-[QianFan]
-qianfan_access_key = "ALTAK8gZhbx8zYcOsD1PDiNI5z"
-qianfan_secret_key = "5381b7b1954c4c4db735ba8ea4fbc0e7"
-qianfan_endpoint = ""
-
 [XunFei-XingHuo]
 xing_huo_appid = "c450c96c"
 xing_huo_key = "fa45d5f83bbf0877cd955d6ad177c852"

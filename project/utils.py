@@ -41,10 +41,6 @@ def load_config():
     qwen_app_id = api_config["Qwen-Turbo"]["qwen_app_id"]
     global qwen_key
     qwen_key = api_config["Qwen-Turbo"]["qwen_key"]
-    global qianfan_access_key
-    qianfan_access_key =api_config["QianFan"]["qianfan_access_key"]
-    global qianfan_secret_key
-    qianfan_secret_key =api_config["QianFan"]["qianfan_secret_key"]
     global xing_huo_key
     xing_huo_key = api_config["XunFei-XingHuo"]["xing_huo_key"]
     global xing_huo_base
@@ -70,7 +66,7 @@ def load_config():
     language_style = generator_config["GENERATOR"]["language_style"]
 
 def toml_to_str():
-    str = f'主要领域：{main_areas},' + f'以{character_style}的口吻和角度,' + f'以及{language_style}的话语风格'+ '写一篇营销文案,' + f'需求如下: {needs},' + f'关键词：{key_words}'
+    str = f'主要领域：{main_areas},' + f'以{character_style}为目标对象,' + f'使用{language_style}的话语风格'+ '写一篇营销文案,' + f'需求如下: {needs},' + f'关键词：{key_words}'
     return str
 
 def generate_by_models(model, str):
@@ -158,20 +154,6 @@ def generate_by_models(model, str):
         else:
             print('request_id=%s\n output=%s\n usage=%s\n' % (response.request_id, response.output, response.usage))
             return response.output.text
-
-    # elif "QianFan" in model:
-    #     os.environ["QIANFAN_ACCESS_KEY"] = qianfan_access_key
-    #     os.environ["QIANFAN_SECRET_KEY"] = qianfan_secret_key
-    #
-    #     chat_comp = qianfan.ChatCompletion()
-    #     # 指定特定模型
-    #     resp = chat_comp.do(model="ERNIE-4.0-8K", messages=[{
-    #         "role": "user",
-    #         "content": f"我的需求说明如下：{str},根据我的需求给我一份营销文案,结合你你对这类产品的认知,向用户展示这款产品的优点,让人看了就想购买。" +
-    #                                        "仅仅给出文案，给出文案之后立即停止回答",
-    #     }])
-    #     print(resp["body"])
-    #     return resp["body"]
 
     elif "generalv3.5" in model:
         spark = ChatSparkLLM(

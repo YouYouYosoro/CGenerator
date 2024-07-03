@@ -33,45 +33,7 @@ def txt_generator():
                 size='lg', radius=20, icon=True, closable=True, color='error')
 
         with st.expander("**主要领域**", expanded=True):
-            main_areas = sac.cascader(items=[
-                sac.CasItem('无'),
-                sac.CasItem('电脑', icon='node-plus-fill', children=[
-                    sac.CasItem('整机'),
-                    sac.CasItem('CPU'),
-                    sac.CasItem('主板'),
-                    sac.CasItem('散热'),
-                    sac.CasItem('内存'),
-                    sac.CasItem('显卡'),
-                    sac.CasItem('硬盘'),
-                    sac.CasItem('电源'),
-                    sac.CasItem('机箱'),
-                ]),
-                sac.CasItem('生活', icon='node-plus-fill', children=[
-                    sac.CasItem('日常用品'),
-                    sac.CasItem('卫生'),
-                    sac.CasItem('厨房'),
-                ]),
-                sac.CasItem('女士', icon='node-plus-fill', children=[
-                    sac.CasItem('护肤'),
-                    sac.CasItem('化妆品'),
-                    sac.CasItem('美容'),
-                    sac.CasItem('美发'),
-                    sac.CasItem('美甲'),
-                    sac.CasItem('服装'),
-                    sac.CasItem('鞋子'),
-                    sac.CasItem('运动'),
-                ]),
-                sac.CasItem('男士', icon='node-plus-fill', children=[
-                    sac.CasItem('保养'),
-                    sac.CasItem('服装'),
-                    sac.CasItem('鞋子'),
-                    sac.CasItem('运动'),
-                    sac.CasItem('电子产品'),
-                ]),
-                sac.CasItem('更多', icon='node-plus-fill', children=[
-                    sac.CasItem('更多'),
-                ]),
-            ], placeholder='专业领域', search=True)
+            main_areas = st.text_input("请输入你的产品领域分类", placeholder="如：数码产品、服饰等等")
             if main_areas:
                 generator_config["GENERATOR"]["main_areas"] = main_areas
 
@@ -85,7 +47,7 @@ def txt_generator():
             if needs:
                 generator_config["GENERATOR"]["key_words"] = key_words
 
-        with st.expander("**人设风格**", expanded=True):
+        with st.expander("**客户人群**", expanded=True):
             character_style = sac.cascader(items=[
                 sac.CasItem('女中学生'),
                 sac.CasItem('男中学生'),
@@ -100,7 +62,7 @@ def txt_generator():
                 sac.CasItem('母亲'),
                 sac.CasItem('父亲'),
                 sac.CasItem('老年人'),
-            ], placeholder='选择人设风格', search=True)
+            ], placeholder='选择客户人群', search=True)
             if character_style:
                 generator_config["GENERATOR"]["character_style"] = character_style
 
