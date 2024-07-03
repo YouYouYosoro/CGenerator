@@ -19,6 +19,9 @@ def txt_generator():
                     sac.ChipItem(label='moonshot-v1-8k'),
                     sac.ChipItem(label='glm-4-flash'),
                     sac.ChipItem(label='deepseek-chat'),
+                    sac.ChipItem(label='Doubao-lite-32k'),
+                    sac.ChipItem(label='Qwen-Turbo'),
+                    sac.ChipItem(label='generalv3.5'),
                 ], format_func='title', direction='vertical', radius='sm',
                 multiple=True, return_index=False
             )

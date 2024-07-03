@@ -1,7 +1,7 @@
 [GENERATOR]
-generator_model = [ "glm-4-flash", "deepseek-chat",]
-main_areas = [ "男士", "运动",]
-needs = "给我写一份欧文五代球鞋的营销文案，结合你的所有关于一款优秀球鞋的认知，展示这款产品的优势，让人听了就想买"
-key_words = "抓地力，抗扭转，穿感舒适"
-character_style = [ "运动员",]
-language_style = [ "专业", "有号召力", "平和",]
+generator_model = [ "glm-4-flash", "moonshot-v1-8k", "deepseek-chat", "Qwen-Turbo", "Doubao-lite-32k", "generalv3.5",]
+main_areas = [ "女士", "化妆品",]
+needs = "给我写一份白桦树口红的营销文案"
+key_words = "精致，精准色号"
+character_style = [ "女大学生",]
+language_style = [ "活泼", "专业", "温柔",]
